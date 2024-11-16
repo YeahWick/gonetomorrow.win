@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+        {% if date %}
+        <time>{{ date }}</time>
+        {% endif %}
+    </header>
+    
+    <main>
+        {{ content | safe }}
+    </main>
+    
+    <footer>
+        <p>Generated with SimpleStaticGen</p>
+    </footer>
+</body>
+</html>

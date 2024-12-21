@@ -1,0 +1,38 @@
+name: Hello World Workflow
+
+on:
+  # Trigger on push events to main branch
+  push:
+    branches: [ main ]
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+  # Also trigger on pull requests to main
+  #pull_request:
+    #branches: [ main ]
+
+jobs:
+  say-hello:
+    # Specify the runner environment
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+      
+      # Print hello world message
+      - name: Hello World
+        run: |
+          echo "Hello World!"
+          echo "Running on branch ${{ github.ref }}"
+          echo "Repository: ${{ github.repository }}"
+          
+      # Example of using environment variables
+      - name: Greet with custom message
+        env:
+          GREETING: "Hello from GitHub Actions!"
+        run: echo $GREETING
+        
+      # Example of using conditional execution
+      - name: Conditional step
+        if: github.event_name == 'push'
+        run: echo "This step only runs on push events"

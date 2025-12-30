@@ -9,7 +9,7 @@
   ],
     "remoteEnv": {
     "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
-    "ANTHROPIC_AUTH_TOKEN: "${containerEnv:OR_API}",
+    "ANTHROPIC_AUTH_TOKEN": "${containerEnv:OR_API}",
     "ANTHROPIC_API_KEY": "",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "mistralai/devstral-2512:free",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "mistralai/devstral-2512:free",

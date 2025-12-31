@@ -5,32 +5,72 @@
     <meta charset="utf-8">
     <title>Welcome to Gone Tomorrow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <style>
+        body {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #000;
+            color: #0f0;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #0f0;
+        }
+        h1, h2 {
+            color: #f0f;
+            text-shadow: 0 0 5px #f0f;
+        }
+        a {
+            color: #0ff;
+            text-decoration: underline;
+        }
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        .counter {
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        .glitter {
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 15px #0ff;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
     <header>
-        <h1>Welcome to Gone Tomorrow</h1>
-        
+        <h1 class="glitter">Welcome to Gone Tomorrow</h1>
+
         <time>2024-03-20</time>
-        
-    </header>
+        <div class="counter">Visitors: <span class="blink">12345</span></div>
     
     <main>
-        <h1>Welcome</h1>
-<p>This is an example post created by SimpleStaticGen.</p>
-<h2>Features</h2>
+        <h1 class="glitter">Welcome</h1>
+<p>Welcome to my totally radical website! This is an example post created by SimpleStaticGen.</p>
+<h2 class="glitter">Features</h2>
 <ul>
 <li>Markdown support</li>
 <li>Simple templating</li>
 <li>Fast and lightweight</li>
 </ul>
+
+<h2 class="glitter">Check out my blog post!</h2>
+<p>Read my latest blog post about <a href="blog/2024-07-26-ai-slop/ai-slop.html">AI Slop</a> - it's totally awesome!</p>
     </main>
-    
+
     <nav>
         <a href="more.html">More Content</a>
     </nav>
     <footer>
         <p>Generated with SimpleStaticGen</p>
+        <p><a href="http://neocities.org">neo<img src="https://neocities.org/static/favicons/favicon-16x16.png" alt="NeoCities">cities</a></p>
     </footer>
+</div>
 </body>
 </html>

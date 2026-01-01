@@ -1,0 +1,92 @@
+name: Test Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'main'
+      commit:
+        description: 'Commit to deploy'
+        required: false
+
+jobs:
+  deploy-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.branch }}
+        # If a specific commit was provided, use that
+        # Note: This would require additional logic to handle commit checkout
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build site
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        publish_branch: test-gh-pages
+        allow_empty_commit: true
+        keep_files: false
+        force_orphan: false
+      env:
+        # This will deploy to the test-gh-pages branch
+
+    - name: Get deployed URL
+      id: get_url
+      run: |
+        # Determine the URL of the deployed site
+        echo "DEPLOYED_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/test" >> $GITHUB_ENV
+        # Create output to be used by subsequent steps
+        echo "deployed_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/test" >> $GITHUB_OUTPUT
+
+    - name: Wait for deployment
+      run: |
+        # Wait for a few seconds to ensure the deployment is available
+        sleep 15
+
+    - name: Run HTML validation and link checking
+      uses: chabad360/htmlproofer@master
+      with:
+        directory: "./dist"
+        arguments: --assume-ext --disable-external --only-4xx
+
+    - name: Run Lighthouse audit
+      uses: treosh/lighthouse-ci-action@v9
+      with:
+        urls: |
+          ${{ steps.get_url.outputs.deployed_url }}
+        upload: 'false'
+        temporaryPublicStorage: 'true'
+        config: |
+          {
+            "ci": {
+              "upload": {
+                "target": "temporary-public-storage"
+              }
+            },
+            "assert": {
+              "preset": "lighthouse:recommended"
+            }
+          }
+
+    - name: Run accessibility tests
+      run: |
+        # Add accessibility testing with axe-core
+        npm install -D @axe-core/cli
+        axe-cli ${{ steps.get_url.outputs.deployed_url }} --exit --verbose

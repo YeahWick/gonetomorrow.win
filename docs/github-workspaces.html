@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Workspaces and Branch Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #2980b9;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .note {
+            background-color: #f8f9fa;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        code {
+            background-color: #f1f3f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f1f3f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .workflow-step {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .command {
+            font-weight: bold;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GitHub Workspaces and Branch Management</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>This guide explains the workflow for using GitHub workspaces and managing branches in this project. Understanding this process is crucial for effective collaboration and maintaining a clean, organized codebase.</p>
+        </section>
+
+        <section>
+            <h2>Setting Up Your Workspace</h2>
+            <p>When contributing to this project, follow these steps to set up your development environment:</p>
+
+            <div class="workflow-step">
+                <h3>1. Fork the Repository</h3>
+                <p>Begin by forking the main repository to your personal GitHub account. This creates your own copy of the project where you can make changes without affecting the original.</p>
+                <p>Visit the <a href="https://github.com/YeahWick/gonetomorrow.win">repository homepage</a> and click the "Fork" button in the top-right corner.</p>
+            </div>
+
+            <div class="workflow-step">
+                <h3>2. Clone Your Fork</h3>
+                <p>Clone your forked repository to your local machine:</p>
+                <pre><code>git clone https://github.com/your-username/gonetomorrow.win.git</code></pre>
+                <p>Navigate into the project directory:</p>
+                <pre><code>cd gonetomorrow.win</code></pre>
+            </div>
+
+            <div class="workflow-step">
+                <h3>3. Set Up the Original Repository as a Remote</h3>
+                <p>Add the original repository as an "upstream" remote to keep your fork synchronized:</p>
+                <pre><code>git remote add upstream https://github.com/YeahWick/gonetomorrow.win.git</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Branch Management Workflow</h2>
+            <p>Proper branch management is essential for organized development. Follow this branching strategy:</p>
+
+            <div class="workflow-step">
+                <h3>1. Create a New Branch</h3>
+                <p>Always create a new branch for each feature, bug fix, or documentation update. Use descriptive branch names:</p>
+                <pre><code>git checkout -b feature/new-button-style</code></pre>
+                <p>Or for bug fixes:</p>
+                <pre><code>git checkout -b fix/header-responsive-issue</code></pre>
+            </div>
+
+            <div class="workflow-step">
+                <h3>2. Make Your Changes</h3>
+                <p>Implement your changes, additions, or fixes. Make sure to follow the project's code style and conventions.</p>
+                <p>Commit your changes with clear, descriptive messages:</p>
+                <pre><code>git add .
+                git commit -m "Add responsive styling to header component"</code></pre>
+            </div>
+
+            <div class="workflow-step">
+                <h3>3. Push to Your Fork</h3>
+                <p>Push your branch to your forked repository:</p>
+                <pre><code>git push origin feature/new-button-style</code></pre>
+                <p>The first time you push a new branch, you may need to set the upstream:</p>
+                <pre><code>git push -u origin feature/new-button-style</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Creating a Pull Request</h2>
+            <p>Once your changes are pushed to your fork, you can create a pull request to propose your changes to the main project.</p>
+
+            <div class="workflow-step">
+                <h3>1. Navigate to the Pull Request Page</h3>
+                <p>Go to the <a href="https://github.com/YeahWick/gonetomorrow.win">original repository</a> on GitHub and click on the "Pull requests" tab.</p>
+                <p>Click the "New pull request" button.</p>
+            </div>
+
+            <div class="workflow-step">
+                <h3>2. Select Base and Compare Branches</h3>
+                <p>In the pull request creation page:</p>
+                <ul>
+                    <li>Set the <strong>base repository</strong> to <code>YeahWick/gonetomorrow.win</code> and the <strong>base</strong> branch to <code>main</code></li>
+                    <li>Set the <strong>head repository</strong> to your fork (<code>your-username/gonetomorrow.win</code>) and the <strong>compare</strong> branch to your feature branch (<code>feature/new-button-style</code>)</li>
+                </ul>
+                <p>This configuration proposes to merge your changes from your feature branch into the main branch of the original repository.</p>
+            </div>
+
+            <div class="workflow-step">
+                <h3>3. Fill Out the Pull Request Template</h3>
+                <p>Provide a clear title and detailed description of your changes:</p>
+                <ul>
+                    <li><strong>Title</strong>: Summarize the change concisely</li>
+                    <li><strong>Description</strong>: Explain what changes were made and why</li>
+                    <li><strong>Related issues</strong>: Reference any related issues with #issue-number</li>
+                    <li><strong>Test plan</strong>: Describe how to verify the changes work as expected</li>
+                </ul>
+            </div>
+
+            <div class="workflow-step">
+                <h3>4. Submit the Pull Request</h3>
+                <p>Click "Create pull request" to submit your proposed changes.</p>
+                <p>Alternatively, you can create a pull request directly from the command line using GitHub CLI:</p>
+                <pre><code>gh pr create --title "Add new button style" --body "This PR adds the new button styling as per design requirements.\n\n## Test\n- [ ] Verify buttons appear correctly on all pages\n- [ ] Check responsiveness on mobile devices"</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Best Practices</h2>
+            <div class="workflow-step">
+                <h3>1. Keep Commits Focused</h3>
+                <p>Each commit should represent a single logical change. Avoid combining unrelated changes in the same commit.</p>
+            </div>
+
+            <div class="workflow-step">
+                <h3>2. Write Clear Commit Messages</h3>
+                <p>Follow the conventional commit format when possible:</p>
+                <ul>
+                    <li><code>feat:</code> for new features</li>
+                    <li><code>fix:</code> for bug fixes</li>
+                    <li><code>docs:</code> for documentation changes</li>
+                    <li><code>style:</code> for formatting changes</li>
+                    <li><code>refactor:</code> for code refactoring</li>
+                    <li><code>test:</code> for adding tests</li>
+                    <li><code>chore:</code> for maintenance tasks</li>
+                </ul>
+                <p>Example: <code>feat(button): add hover animation</code></p>
+            </div>
+
+            <div class="workflow-step">
+                <h3>3. Sync with Upstream Regularly</h3>
+                <p>Keep your fork updated with changes from the main repository:</p>
+                <pre><code>git fetch upstream
+                git merge upstream/main</code></pre>
+                <p>Or rebase your branch:</p>
+                <pre><code>git pull --rebase upstream main</code></pre>
+            </div>
+
+            <div class="workflow-step">
+                <h3>4. Address Feedback Promptly</h3>
+                <p>When reviewers provide feedback on your pull request, address it promptly by making additional commits to your branch. These commits will automatically appear in the pull request.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Troubleshooting Common Issues</h2>
+
+            <div class="workflow-step">
+                <h3>1. "No commits between branches" Error</h3>
+                <p>If you encounter this error when creating a PR, it typically means:</p>
+                <ul>
+                    <li>Your branch is based on an outdated commit</li>
+                    <li>You haven't made any commits on your branch yet</li>
+                    <li>Your branch is already in sync with the target branch</li>
+                </ul>
+                <p>Solution: Make sure you've committed your changes and that your branch contains commits not present in the main branch.</p>
+            </div>
+
+            <div class="workflow-step">
+                <h3>2. Merge Conflicts</h3>
+                <p>If your branch has conflicts with the main branch, you'll need to resolve them:</p>
+                <pre><code>git pull upstream main
+                # Resolve conflicts in the affected files
+                git add .
+                git commit -m "Resolve merge conflicts"</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>Following this workflow ensures smooth collaboration and maintains the quality and stability of the codebase. By using proper branching strategies and pull requests, we can effectively review changes, catch potential issues early, and maintain a clean project history.</p>
+            <p>Remember to communicate with team members when working on related features, and don't hesitate to ask questions if you're unsure about any part of the process.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Last updated: January 2026</p>
+    </footer>
+</body>
+</html>
